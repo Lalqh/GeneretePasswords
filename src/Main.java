@@ -1,11 +1,8 @@
 import files.arguments.ObtainingData;
-
 import files.Files;
 import files.ReadFile;
 import files.WriteFile;
 import functions.GeneratePassoword;
-
-import functions.ObtainingData;
 
 
 import java.io.File;
