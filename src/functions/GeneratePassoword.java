@@ -12,29 +12,29 @@ public class GeneratePassoword {
 
     private String password;
 
-    private String generateCapsLock(){
+    private String generateCapsLock() {
         return "ABCDEFGHIJKLMNOPQRSTUVWXYZ-/.^&*_!@=+>)";
     }
 
-    private String genereteCharacters(){
+    private String genereteCharacters() {
         SecureRandom secureRandom = new SecureRandom();
         String characters = new BigInteger(130, secureRandom).toString(32);
         return characters = characters.substring(0, 8);
     }
 
-    private int generatePossCharacters(){
+    private int generatePossCharacters() {
         return (int) (Math.random()*7);
     }
 
-    private int generateRadomNumer(){
+    private int generateRadomNumer() {
         return (int) (Math.random()*39);
     }
 
-    private int generatePosition(){
+    private int generatePosition() {
         return (int) (Math.random()*4+1);
     }
 
-    public String generatePassword(){
+    public String generatePassword() {
         char[] prePasword;
         char capsLock;
 

@@ -1,4 +1,4 @@
-package functions;
+package files.arguments;
 
 public class ObtainingData {
 

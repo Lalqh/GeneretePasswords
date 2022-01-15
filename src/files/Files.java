@@ -14,5 +14,4 @@ public class Files {
     public Files(File file) {
         this.file = file;
     }
-
 }
