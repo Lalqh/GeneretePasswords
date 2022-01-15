@@ -1,10 +1,12 @@
-package main;
+import files.arguments.ObtainingData;
 
 import files.Files;
 import files.ReadFile;
 import files.WriteFile;
 import functions.GeneratePassoword;
+
 import functions.ObtainingData;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -15,6 +17,7 @@ import java.io.IOException;
  */
 
 public class Main {
+
     public static void main(String[] args) {
 
         File file = new File("password.txt");

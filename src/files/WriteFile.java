@@ -1,12 +1,12 @@
 package files;
 
-import functions.ObtainingData;
+import files.arguments.ObtainingData;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class WriteFile extends Files{
+public class WriteFile extends Files {
 
     private ObtainingData data;
 
