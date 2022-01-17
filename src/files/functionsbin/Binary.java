@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 
-public class FunctionBin extends ObjectOutputStream {
+public class Binary extends ObjectOutputStream {
 
-    public FunctionBin(OutputStream out) throws IOException {
+    public Binary(OutputStream out) throws IOException {
         super(out);
     }
 
-    protected FunctionBin() throws IOException, SecurityException {
+    protected Binary() throws IOException, SecurityException {
     }
 
     @Override
