@@ -1,6 +1,8 @@
 package files;
 
-import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 
 /**
  *
@@ -9,9 +11,15 @@ import java.io.File;
 
 public class Files {
 
-    protected File file;
+    protected FileOutputStream writeFile;
+    protected FileInputStream readFile;
 
-    public Files(File file) {
-        this.file = file;
+    public Files(FileOutputStream writeFile) {
+        this.writeFile = writeFile;
     }
+
+    public Files(FileInputStream readFile) {
+        this.readFile = readFile;
+    }
+
 }

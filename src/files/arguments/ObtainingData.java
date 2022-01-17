@@ -1,6 +1,8 @@
 package files.arguments;
 
-public class ObtainingData {
+import java.io.Serializable;
+
+public class ObtainingData implements Serializable {
 
     private String passwordName;
     private String password;

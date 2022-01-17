@@ -1,12 +1,6 @@
-import files.arguments.ObtainingData;
-import files.Files;
-import files.ReadFile;
-import files.WriteFile;
-import functions.GeneratePassoword;
-
-
-import java.io.File;
-import java.io.IOException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 /**
  *
@@ -16,21 +10,14 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) {
-
-        File file = new File("password.txt");
+        FileOutputStream writeBin=null;
+        FileInputStream readBin= null;
         try {
-            if (file.createNewFile()){
-                System.out.println();
-            }
-        }catch (IOException ioException){
-            System.err.println("exception = " + ioException);
+            writeBin = new FileOutputStream("resources/password.bin", true);
+            readBin = new FileInputStream("resources/password.bin");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
 
-        WriteFile writeFile = new WriteFile(file, new ObtainingData("Prubea", "wasd"));
-        writeFile.writeFiles();
-
-        ReadFile readFile = new ReadFile(file);
-
-        readFile.showPassowrds();
     }
 }

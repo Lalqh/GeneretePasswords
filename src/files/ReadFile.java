@@ -1,13 +1,21 @@
 package files;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+import files.arguments.ObtainingData;
+
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
+/**
+ *
+ * Developed by @CompactDevs
+ */
 
 public class ReadFile extends Files {
 
-    public ReadFile(File file) {
-        super(file);
+    public ReadFile(FileInputStream readFile) {
+        super(readFile);
     }
 
     public String searchPassword(String passwordName) {
@@ -15,13 +23,22 @@ public class ReadFile extends Files {
     }
 
     public void showPassowrds() {
+        ObtainingData arguments;
+        int i=0;
         try {
-            Scanner read = new Scanner(file);
-            while (read.hasNextLine()){
-                System.out.println(read.nextLine());
+            ObjectInputStream read = new ObjectInputStream(readFile);
+            while (true){
+                arguments = (ObtainingData) read.readObject();
+                System.out.println("Mostrando la contraseña numero: "+(i+1));
+                System.out.println("Nombre de la contraseña: "+arguments.getPasswordName());
+                System.out.println("Contraseña: "+arguments.getPassword());
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        } catch (EOFException eofException){
+            return;
+        } catch (IOException ioException) {
+            System.err.println("Error "+ioException);
+        } catch (ClassNotFoundException classNotFoundException) {
+            System.err.println("error "+classNotFoundException);
         }
     }
 }

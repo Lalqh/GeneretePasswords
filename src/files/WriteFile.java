@@ -1,17 +1,23 @@
 package files;
 
 import files.arguments.ObtainingData;
+import files.functionsbin.FunctionBin;
 
-import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+
+/**
+ *
+ * Developed by @CompactDevs
+ */
 
 public class WriteFile extends Files {
 
     private ObtainingData data;
 
-    public WriteFile(File file, ObtainingData data) {
-        super(file);
+    public WriteFile(FileOutputStream writeFile, ObtainingData data) {
+        super(writeFile);
         this.data = data;
     }
 
@@ -25,11 +31,11 @@ public class WriteFile extends Files {
 
     public void writeFiles(){
         try {
-            FileWriter writer = new FileWriter(file, true);
-            writer.write(data.getPasswordName()+"%"+data.getPassword()+"\r\n");
+            FunctionBin writer = new FunctionBin(writeFile);
+            writer.writeObject(data);
             writer.close();
-        }catch (IOException ioException){
-            System.err.println("exception = " + ioException);
+        }catch (IOException ioException) {
+            System.err.println("Error, " +ioException);
         }
     }
 }
