@@ -37,7 +37,7 @@ public class GeneratePassoword {
     /* This method generates a random number to know how many characters of the string generated with
     genereteRadomString are going to be replaced.
      */
-    private int generatePosition() {
+    private int generateChangeNumber() {
         return (int) (Math.random()*4+1);
     }
 
@@ -65,7 +65,7 @@ public class GeneratePassoword {
 
         prePasword = genereteRadomString().toCharArray();
 
-        for (int i = 0; i <generatePosition(); i++) {
+        for (int i = 0; i <generateChangeNumber(); i++) {
             capsLock = generateCapsAndChar().charAt(generatePossForCaps());
             prePasword[generatePossCharacters()]=capsLock;
         }
