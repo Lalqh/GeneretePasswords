@@ -1,11 +1,10 @@
 package files;
 
 import files.arguments.ObtainingData;
-import files.functionsbin.FunctionBin;
+import files.functionsbin.Binary;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 
 /**
  *
@@ -31,7 +30,7 @@ public class WriteFile extends Files {
 
     public void writeFiles(){
         try {
-            FunctionBin writer = new FunctionBin(writeFile);
+            Binary writer = new Binary(writeFile);
             writer.writeObject(data);
             writer.close();
         }catch (IOException ioException) {

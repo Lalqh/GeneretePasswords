@@ -14,19 +14,34 @@ import java.io.ObjectInputStream;
 
 public class ReadFile extends Files {
 
+    private ObjectInputStream read;
+    private ObtainingData arguments;
+
     public ReadFile(FileInputStream readFile) {
         super(readFile);
     }
 
-    public String searchPassword(String passwordName) {
-        return passwordName;
+    public ObtainingData searchPassword(String passwordName) {
+        boolean found = false;
+
+        try {
+            read = new ObjectInputStream(readFile);
+            while (!found){
+                arguments = (ObtainingData) read.readObject();
+                if (arguments.getPasswordName().equals(passwordName)){
+                    found=true;
+                }
+            }
+        }catch (IOException | ClassNotFoundException exception){
+            System.err.println("Error: "+exception);
+        }
+        return arguments;
     }
 
     public void showPassowrds() {
-        ObtainingData arguments;
         int i=0;
         try {
-            ObjectInputStream read = new ObjectInputStream(readFile);
+            read = new ObjectInputStream(readFile);
             while (true){
                 arguments = (ObtainingData) read.readObject();
                 System.out.println("Mostrando la contraseña numero: "+(i+1));
