@@ -43,9 +43,11 @@ public class ReadFile extends Files {
             read = new ObjectInputStream(readFile);
             while (true){
                 arguments = (ObtainingData) read.readObject();
-                System.out.println("Mostrando la contraseña numero: "+(i+1));
+                System.out.println("Mostrando la contraseña numero: "+i);
                 System.out.println("Nombre de la contraseña: "+arguments.getPasswordName());
                 System.out.println("Contraseña: "+arguments.getPassword());
+                i++;
+                System.out.println();
             }
         }catch (EOFException eofException){
             return;
