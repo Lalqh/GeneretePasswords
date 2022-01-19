@@ -23,17 +23,16 @@ public class ReadFile extends Files {
 
     public ObtainingData searchPassword(String passwordName) {
         boolean found = false;
-
         try {
             read = new ObjectInputStream(readFile);
-            while (!found){
+            while (!found) {
                 arguments = (ObtainingData) read.readObject();
-                if (arguments.getPasswordName().equals(passwordName)){
-                    found=true;
+                if (arguments.getPasswordName().equals(passwordName)) {
+                    found = true;
                 }
             }
         }catch (IOException | ClassNotFoundException exception){
-            System.err.println("Error: "+exception);
+            arguments = null;
         }
         return arguments;
     }
@@ -48,11 +47,11 @@ public class ReadFile extends Files {
                 System.out.println("Nombre de la contraseña: "+arguments.getPasswordName());
                 System.out.println("Contraseña: "+arguments.getPassword());
             }
-        } catch (EOFException eofException){
+        }catch (EOFException eofException){
             return;
-        } catch (IOException ioException) {
+        }catch (IOException ioException) {
             System.err.println("Error "+ioException);
-        } catch (ClassNotFoundException classNotFoundException) {
+        }catch (ClassNotFoundException classNotFoundException) {
             System.err.println("error "+classNotFoundException);
         }
     }

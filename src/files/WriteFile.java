@@ -13,25 +13,25 @@ import java.io.IOException;
 
 public class WriteFile extends Files {
 
-    private ObtainingData data;
+    private ObtainingData arguments;
 
-    public WriteFile(FileOutputStream writeFile, ObtainingData data) {
+    public WriteFile(FileOutputStream writeFile, ObtainingData arguments) {
         super(writeFile);
-        this.data = data;
+        this.arguments = arguments;
     }
 
     public ObtainingData getData() {
-        return data;
+        return arguments;
     }
 
     public void setData(ObtainingData data) {
-        this.data = data;
+        this.arguments = data;
     }
 
-    public void writeFiles(){
+    public void writeInFile(){
         try {
             Binary writer = new Binary(writeFile);
-            writer.writeObject(data);
+            writer.writeObject(arguments);
             writer.close();
         }catch (IOException ioException) {
             System.err.println("Error, " +ioException);

@@ -2,7 +2,6 @@ package files;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
 
 /**
  *
@@ -21,5 +20,4 @@ public class Files {
     public Files(FileInputStream readFile) {
         this.readFile = readFile;
     }
-
 }
