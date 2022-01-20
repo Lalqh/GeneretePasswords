@@ -32,7 +32,8 @@ public class ReadFile extends Files {
                 }
             }
         }catch (IOException | ClassNotFoundException exception){
-            arguments = null;
+            System.err.println("No se enccontro el dato");
+            arguments=null;
         }
         return arguments;
     }

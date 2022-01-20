@@ -32,7 +32,6 @@ public class WriteFile extends Files {
         try {
             Binary writer = new Binary(writeFile);
             writer.writeObject(arguments);
-            writer.close();
         }catch (IOException ioException) {
             System.err.println("Error, " +ioException);
         }
