@@ -39,7 +39,7 @@ public class ReadFile extends Files {
     }
 
     public void showPassowrds() {
-        int i=0;
+        int i=1;
         try {
             read = new ObjectInputStream(readFile);
             while (true){
