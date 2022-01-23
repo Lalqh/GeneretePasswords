@@ -30,6 +30,8 @@ public class Main {
 
     public static void menu() throws InterruptedException {
         int option;
+        String passwordName;
+        ObtainingData arguments;
         Scanner input = new Scanner(System.in);
         try {
             do {
@@ -42,21 +44,27 @@ public class Main {
                 option = input.nextInt();
                 System.out.println();
 
-                switch (option){
-                    case 1:
-                        generateAndSavePassword();
-                        break;
-                    case 2:
-                        showAllPaswords();
-                        break;
-                    case 3:
+                switch (option) {
+                    case 1 -> generateAndSavePassword();
+                    case 2 -> showAllPaswords();
+                    case 3 -> {
+                        input.nextLine();
+                        System.out.print("Ingrese la contraseña que desea buscar: ");
+                        passwordName = input.nextLine();
+                        arguments = searchPaswword(passwordName);
+                        if (arguments != null) {
+                            System.out.println("El nombre de la contraseña encontrada es: " +
+                                    ""+arguments.getPasswordName());
+                            System.out.println("La contraseña es: "+arguments.getPassword());
+                            System.out.println();
+                        } else {
+                            System.err.println("No existe una contraseña guardada con ese nombre.");
+                            System.out.println();
+                        }
+                    }
+                    case 4 -> System.out.println("Saliendo del programa...\n");
+                    default -> System.out.println("No existe esta opcion, intente nuevamente\n");
 
-                        break;
-                    case 4:
-                        System.out.println("Saliendo del programa...");
-                        break;
-                    default:
-                        System.out.println("No existe esta opcion, intente nuevamente");
                 }
             }while (option!=4);
         }catch (Exception e){
@@ -70,6 +78,7 @@ public class Main {
     private static void generateAndSavePassword(){
         Scanner input = new Scanner(System.in);
         String namePassword, password;
+        ObtainingData arguments;
         try{
             FileOutputStream writeBin = new FileOutputStream("resources/password.bin", true);
             System.out.println("Generando una contraseña...");
@@ -78,9 +87,16 @@ public class Main {
             System.out.println("La contraseña generada es: "+password);
             System.out.print("Ahora ingrese un nombre como identificador para la contraseña: ");
             namePassword = input.nextLine();
-            WriteFile writeFile = new WriteFile(writeBin, new ObtainingData(namePassword, password));
-            writeFile.writeInFile();
-            System.out.println("Datos guardardos correctamente.");
+            arguments = searchPaswword(namePassword);
+            if (arguments == null){
+                WriteFile writeFile = new WriteFile(writeBin, new ObtainingData(namePassword, password));
+                writeFile.writeInFile();
+                System.out.println("Datos guardardos correctamente.");
+                System.out.println();
+            }else {
+                System.err.println("Error, ya existe una contraseña con este nombre");
+                System.out.println();
+            }
         }catch (IOException exception){
             System.err.println("Ocurrio un error al almacenar la contrasñea");
         }
@@ -94,5 +110,16 @@ public class Main {
         } catch (IOException exception){
             System.err.println("Ocurrio un error al leer los datos");
         }
+    }
+    private static ObtainingData searchPaswword(String passwordName){
+        ObtainingData argunmets = null;
+        try {
+            FileInputStream readBin = new FileInputStream("resources/password.bin");
+            ReadFile readFile = new ReadFile(readBin);
+            argunmets = readFile.searchPassword(passwordName);
+        }catch (Exception exception){
+            System.err.println("Ocuurio un error al leer los datos");
+        }
+        return argunmets;
     }
 }
