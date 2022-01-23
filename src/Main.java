@@ -1,13 +1,9 @@
-import files.Files;
 import files.ReadFile;
 import files.WriteFile;
 import files.arguments.ObtainingData;
 import functions.GeneratePassoword;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -17,39 +13,24 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static FileOutputStream writeBin;
-    private static FileInputStream readBin;
-    private static Scanner input = new Scanner(System.in);
-
     private static void createDir(){
         File directorry = new File("resources");
-        if (directorry.mkdir()){
-            initializeFiles();
-        }else {
-            initializeFiles();
+        if (directorry.mkdir()) {
+            System.out.println();
         }
     }
 
-    private static void initializeFiles(){
-        try {
-            writeBin = new FileOutputStream("resources/password.bin", true);
-            readBin = new FileInputStream("resources/password.bin");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void main(String[] args) {
-        createDir();
+    public static void main(String[] args) throws InterruptedException {
+      createDir();
         System.out.println("Bienvenido a la app generador de contraseñas.\n" +
                 "Desarrollado por @ComapactDevs");
         System.out.println();
-        menu();
-        System.out.println();
+      menu();
     }
 
-    public static void menu(){
+    public static void menu() throws InterruptedException {
         int option;
+        Scanner input = new Scanner(System.in);
         try {
             do {
                 System.out.println("\t::Menu::");
@@ -64,15 +45,13 @@ public class Main {
                 switch (option){
                     case 1:
                         generateAndSavePassword();
-                        System.out.println();
                         break;
                     case 2:
                         showAllPaswords();
-                        System.out.println();
                         break;
                     case 3:
-                        break;
 
+                        break;
                     case 4:
                         System.out.println("Saliendo del programa...");
                         break;
@@ -81,28 +60,39 @@ public class Main {
                 }
             }while (option!=4);
         }catch (Exception e){
-            System.err.println("Error, debes de ingresar un numero...");
+            System.err.println("Error, debes de ingresar un numero, intenta nuevamente");
             System.out.println();
+            Thread.sleep(100);
             menu();
         }
     }
 
     private static void generateAndSavePassword(){
-        input.nextLine();
+        Scanner input = new Scanner(System.in);
         String namePassword, password;
-        System.out.println("Generando una contraseña...");
-        GeneratePassoword generatePassoword = new GeneratePassoword();
-        password = generatePassoword.generatePassword();
-        System.out.println("La contraseña generada es: "+password);
-        System.out.print("Ahora ingrese un nombre como identificador para la contraseña: ");
-        namePassword = input.nextLine();
-        WriteFile writeFile = new WriteFile(writeBin, new ObtainingData(namePassword, password));
-        writeFile.writeInFile();
-        System.out.println("Datos guardardos correctamente.");
+        try{
+            FileOutputStream writeBin = new FileOutputStream("resources/password.bin", true);
+            System.out.println("Generando una contraseña...");
+            GeneratePassoword generatePassoword = new GeneratePassoword();
+            password = generatePassoword.generatePassword();
+            System.out.println("La contraseña generada es: "+password);
+            System.out.print("Ahora ingrese un nombre como identificador para la contraseña: ");
+            namePassword = input.nextLine();
+            WriteFile writeFile = new WriteFile(writeBin, new ObtainingData(namePassword, password));
+            writeFile.writeInFile();
+            System.out.println("Datos guardardos correctamente.");
+        }catch (IOException exception){
+            System.err.println("Ocurrio un error al almacenar la contrasñea");
+        }
     }
 
     private static void showAllPaswords(){
-        ReadFile readFile = new ReadFile(readBin);
-        readFile.showPassowrds();
+        try {
+            FileInputStream readBin = new FileInputStream("resources/password.bin");
+            ReadFile readFile = new ReadFile(readBin);
+            readFile.showPassowrds();
+        } catch (IOException exception){
+            System.err.println("Ocurrio un error al leer los datos");
+        }
     }
 }
