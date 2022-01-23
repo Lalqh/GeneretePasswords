@@ -2,7 +2,6 @@ package files;
 
 import files.arguments.ObtainingData;
 
-import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -12,12 +11,12 @@ import java.io.ObjectInputStream;
  * Developed by @CompactDevs
  */
 
-public class ReadFile extends Files {
+public class ReadFile extends Files{
 
     private ObjectInputStream read;
     private ObtainingData arguments;
 
-    public ReadFile(FileInputStream readFile) {
+    public ReadFile(FileInputStream readFile){
         super(readFile);
     }
 
@@ -32,7 +31,6 @@ public class ReadFile extends Files {
                 }
             }
         }catch (IOException | ClassNotFoundException exception){
-            System.err.println("No se enccontro el dato");
             arguments=null;
         }
         return arguments;
@@ -50,12 +48,8 @@ public class ReadFile extends Files {
                 i++;
                 System.out.println();
             }
-        }catch (EOFException eofException){
-            return;
-        }catch (IOException ioException) {
-            System.err.println("Error "+ioException);
-        }catch (ClassNotFoundException classNotFoundException) {
-            System.err.println("error "+classNotFoundException);
+        } catch (IOException | ClassNotFoundException exception) {
+            System.err.println();
         }
     }
 }
