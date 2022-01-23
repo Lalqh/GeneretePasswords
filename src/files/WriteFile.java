@@ -11,27 +11,20 @@ import java.io.IOException;
  * Developed by @CompactDevs
  */
 
-public class WriteFile extends Files {
+public class WriteFile extends Files{
 
-    private ObtainingData arguments;
+    private final ObtainingData arguments;
 
-    public WriteFile(FileOutputStream writeFile, ObtainingData arguments) {
-        super(writeFile);
+    public WriteFile(FileOutputStream wiriteFile, ObtainingData arguments) {
+        super(wiriteFile);
         this.arguments = arguments;
-    }
-
-    public ObtainingData getData() {
-        return arguments;
-    }
-
-    public void setData(ObtainingData data) {
-        this.arguments = data;
     }
 
     public void writeInFile(){
         try {
             Binary writer = new Binary(writeFile);
             writer.writeObject(arguments);
+            writer.close();
         }catch (IOException ioException) {
             System.err.println("Error, " +ioException);
         }
